@@ -20,16 +20,15 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPage extends State<MyPage> {
-  List<Widget> _rows = [];
-  Color _color = Colors.green;
   final List<String> _notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  Map<int, String> _selectedNotes = {};
-  int _counterNotes = 0;
+  final Map<int, String> _selectedNotes = {};
+  int _rowsCounter = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: const Icon(Icons.music_note),
           title: const Text('Get the chord'),
           backgroundColor: Colors.yellow[300],
           foregroundColor: Colors.black,
@@ -37,37 +36,47 @@ class _MyPage extends State<MyPage> {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: <Widget>[
-            _rows.isEmpty
-                ? Text('No items')
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _rows.length,
-                    itemBuilder: (context, index) {
-                      return DropdownButton(
-                        items: _notes.map((s) {
-                          return DropdownMenuItem(child: Text(s), value: s);
-                        }).toList(),
-                        value: _selectedNotes[index],
-                        onChanged: (String? a) {
-                          setState(() {
-                            _selectedNotes[index] = a.toString();
-                          });
-                        },
-                      );
-                    },
-                  ),
+            // Notes
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: _rowsCounter,
+              itemBuilder: (context, index) => notesComboBox(index),
+            ),
+            // Add note row
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                  child: Icon(Icons.add_box, size: 30, color: _color),
+                  child:
+                      const Icon(Icons.add_box, size: 30, color: Colors.green),
                   onTap: () {
-                    addRow();
+                    setState(() {
+                      _rowsCounter += 1;
+                    });
                   },
                 ),
                 const Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Text('Add note'),
+                )
+              ],
+            ),
+            // Chord
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  child:
+                      const Icon(Icons.search, size: 30, color: Colors.black),
+                  onTap: () {
+                    setState(() {
+                      print('Search for chord with notes: $_selectedNotes');
+                    });
+                  },
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('Find the chord'),
                 )
               ],
             ),
@@ -75,16 +84,17 @@ class _MyPage extends State<MyPage> {
         ));
   }
 
-  void addRow() {
-    setState(() {
-      _counterNotes += 1;
-      _color == Colors.green ? Colors.red : Colors.green;
-      _rows.add(Container(
-        color: Colors.red[_rows.length * 100],
-        width: 40,
-        height: 20,
-      ));
-      print('notes: $_selectedNotes');
-    });
+  Widget notesComboBox(int index) {
+    return DropdownButton(
+      items: _notes
+          .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+          .toList(),
+      value: _selectedNotes[index],
+      onChanged: (String? note) {
+        setState(() {
+          _selectedNotes[index] = note.toString();
+        });
+      },
+    );
   }
 }
