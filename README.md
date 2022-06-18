@@ -1,16 +1,12 @@
-# get_chord_app
+# Get the Chord App 
+Aplicação em Flutter desenvolvida para plataformas Android e Web implementando o algoritmo desenvolvido em [get_the_chord](https://github.com/crispim1411/get_the_chord).
 
-A new Flutter project.
+## Objetivo
 
-## Getting Started
+Quando se está lendo uma partitura, por exemplo, é possível ver as notas porém nem sempre identificar o acorde resultante rapidamente. Com intuito de exercitar a programação de aplicativos foi então desenvolvido este projeto tendo como base o algoritmo escrito em Rust.
 
-This project is a starting point for a Flutter application.
+## Interface
 
-A few resources to get you started if this is your first Flutter project:
+- imagem Android 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- imagem Web
