@@ -46,60 +46,66 @@ class _MyPage extends State<MyPage> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: <Widget>[
-          // Notes
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: _rowsCounter,
-            itemBuilder: (context, index) => notesComboBox(index),
-          ),
-          // Padding
-          const Padding(padding: EdgeInsets.all(10)),
-          // Add note row, collapses if 4 notes
-          Visibility(
-            visible: _rowsCounter > 3 ? false : true,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  child:
-                      const Icon(Icons.add_box, size: 30, color: Colors.green),
-                  onTap: () {
-                    setState(() {
-                      _rowsCounter += 1;
-                    });
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Add note'),
-                )
-              ],
-            ),
-          ),
-          // Padding
-          const Padding(padding: EdgeInsets.all(10)),
-          // Chord
-          OutlinedButton(
-            onPressed: _selectedNotes.length < 3
-                ? null
-                : () {
-                    print('Search for chord with notes: $_selectedNotes');
-                  },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Icon(Icons.search, size: 30, color: Colors.black),
-                Padding(padding: EdgeInsets.all(10)),
-                Text('Find the chord'),
-              ],
-            ),
-          )
-        ],
+      body: Align(
+        child: AspectRatio(
+          aspectRatio: 3 / 4,
+          child: bodyApp(),
+        ),
       ),
     );
+  }
+
+  Widget bodyApp() {
+    return ListView(padding: const EdgeInsets.all(20), children: <Widget>[
+      // Notes
+      ListView.builder(
+        shrinkWrap: true,
+        itemCount: _rowsCounter,
+        itemBuilder: (context, index) => notesComboBox(index),
+      ),
+      // Padding
+      const Padding(padding: EdgeInsets.all(10)),
+      // Add note row, collapses if 4 notes
+      Visibility(
+        visible: _rowsCounter > 6 ? false : true,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            GestureDetector(
+              child: const Icon(Icons.add_box, size: 30, color: Colors.green),
+              onTap: () {
+                setState(() {
+                  _rowsCounter += 1;
+                });
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.all(10),
+              child: Text('Add note'),
+            )
+          ],
+        ),
+      ),
+      // Padding
+      const Padding(padding: EdgeInsets.all(10)),
+      // Chord Button
+      Container(
+          height: 35,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+          child: OutlinedButton(
+              onPressed: _selectedNotes.length < 3
+                  ? null
+                  : () {
+                      print('Search for chord with notes: $_selectedNotes');
+                    },
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(Icons.search, size: 30, color: Colors.black),
+                    Padding(padding: EdgeInsets.all(10)),
+                    Text('Find the chord'),
+                  ])))
+    ]);
   }
 
   Widget notesComboBox(int index) {
