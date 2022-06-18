@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Get the chord',
       home: MyPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -35,7 +36,7 @@ class _MyPage extends State<MyPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.restore),
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 15),
             onPressed: () {
               setState(() {
                 _selectedNotes.clear();
