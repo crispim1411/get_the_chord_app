@@ -49,12 +49,7 @@ class _MyPage extends State<MyPage> {
           ),
         ],
       ),
-      body: Align(
-        child: AspectRatio(
-          aspectRatio: 3 / 4,
-          child: bodyApp(),
-        ),
-      ),
+      body: bodyApp(),
     );
   }
 
