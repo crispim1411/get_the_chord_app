@@ -54,84 +54,96 @@ class _MyPage extends State<MyPage> {
   }
 
   Widget bodyApp() {
-    return ListView(padding: const EdgeInsets.all(20), children: <Widget>[
-      // Notes
-      ListView.builder(
-        shrinkWrap: true,
-        itemCount: _rowsCounter,
-        itemBuilder: (context, index) => notesComboBox(index),
-      ),
-      // Padding
-      const Padding(padding: EdgeInsets.all(10)),
-      // Add note row, collapses if 4 notes
-      Visibility(
-        visible: _rowsCounter > 6 ? false : true,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            GestureDetector(
-              child: const Icon(Icons.add_box, size: 30, color: Colors.green),
-              onTap: () {
-                setState(() {
-                  _rowsCounter += 1;
-                });
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.all(10),
-              child: Text('Add note'),
-            )
-          ],
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: <Widget>[
+        // Notes
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: _rowsCounter,
+          itemBuilder: (context, index) => notesComboBox(index),
         ),
-      ),
-      // Padding
-      const Padding(padding: EdgeInsets.all(10)),
-      // Chord Button
-      Container(
-          height: 35,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          child: OutlinedButton(
-              onPressed: _selectedNotes.length < 3
-                  ? null
-                  : () {
-                      setState(() {
-                        var notes = <Note>{};
-                        _selectedNotes.forEach((key, value) {
-                          // consertar duplicados
-                          notes.add(Note(value, Accidental.normal));
-                        });
-                        _answer = Scale.getChord(notes.toList());
-                      });
-                    },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Icon(Icons.search, size: 30, color: Colors.black),
-                  const Padding(padding: EdgeInsets.all(10)),
-                  Text(_selectedNotes.length < 3
-                      ? 'Select the notes'
-                      : 'Find the chord'),
-                ],
-              ))),
-      // Padding
-      const Padding(padding: EdgeInsets.all(10)),
-      // Answer
-      Visibility(
+        const Padding(padding: EdgeInsets.all(10)),
+        Visibility(
+          visible: _rowsCounter > 6 ? false : true,
+          child: addRowButton(),
+        ),
+        const Padding(padding: EdgeInsets.all(10)),
+        searchButton(),
+        const Padding(padding: EdgeInsets.all(10)),
+        Visibility(
           visible: _answer.isEmpty ? false : true,
-          child: LimitedBox(
-            maxWidth: 30,
-            child: Container(
-                height: 40,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(_answer)),
-          )),
-    ]);
+          child: answerBox(),
+        ),
+      ],
+    );
+  }
+
+  Widget addRowButton() {
+    return GestureDetector(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: const [
+          Icon(Icons.add, size: 30),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Text('Add row', style: TextStyle(fontSize: 18)),
+          )
+        ],
+      ),
+      onTap: () {
+        setState(() {
+          _rowsCounter += 1;
+        });
+      },
+    );
+  }
+
+  Widget searchButton() {
+    return Container(
+        height: 55,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+        child: OutlinedButton(
+            onPressed: _selectedNotes.length < 3
+                ? null
+                : () {
+                    setState(() {
+                      var notes = <Note>{};
+                      _selectedNotes.forEach((key, value) {
+                        // consertar duplicados
+                        notes.add(Note(value, Accidental.normal));
+                      });
+                      _answer = Scale.getChord(notes.toList());
+                    });
+                  },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(Icons.search, size: 30, color: Colors.black),
+                const Padding(padding: EdgeInsets.all(10)),
+                Text(
+                    _selectedNotes.length < 3
+                        ? 'Select the notes'
+                        : 'Find the chord',
+                    style: const TextStyle(fontSize: 18)),
+              ],
+            )));
+  }
+
+  Widget answerBox() {
+    return Container(
+        height: 200,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          border: Border.all(color: Colors.blueAccent),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Text(
+          _answer,
+          style: const TextStyle(fontSize: 80, fontStyle: FontStyle.italic),
+        ));
   }
 
   Widget notesComboBox(int index) {
