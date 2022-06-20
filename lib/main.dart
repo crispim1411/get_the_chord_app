@@ -148,11 +148,13 @@ class _MyPage extends State<MyPage> {
 
   Widget notesComboBox(int index) {
     return DropdownButton(
+      itemHeight: 60,
       items: Symbol.values
           .map((note) => DropdownMenuItem(
                 value: note,
                 alignment: AlignmentDirectional.center,
-                child: Text(note.toString().split('.').last),
+                child: Text(note.toString().split('.').last,
+                    style: const TextStyle(fontSize: 25)),
               ))
           .toList(),
       value: _selectedNotes[index],
