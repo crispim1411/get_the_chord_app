@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'find_chord.dart';
+import 'models.dart';
 
 void main() => runApp(const MyApp());
 
@@ -21,9 +23,9 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPage extends State<MyPage> {
-  final List<String> _notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  final Map<int, String> _selectedNotes = {};
+  final Map<int, Symbol> _selectedNotes = {};
   int _rowsCounter = 3;
+  String _answer = '';
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class _MyPage extends State<MyPage> {
               setState(() {
                 _selectedNotes.clear();
                 _rowsCounter = 3;
+                _answer = '';
               });
             },
           ),
@@ -96,27 +99,60 @@ class _MyPage extends State<MyPage> {
               onPressed: _selectedNotes.length < 3
                   ? null
                   : () {
-                      print('Search for chord with notes: $_selectedNotes');
+                      setState(() {
+                        var notes = <Note>{};
+                        _selectedNotes.forEach((key, value) {
+                          // consertar duplicados
+                          notes.add(Note(value, Accidental.normal));
+                        });
+                        _answer = Scale.getChord(notes.toList());
+                      });
                     },
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.search, size: 30, color: Colors.black),
-                    Padding(padding: EdgeInsets.all(10)),
-                    Text('Find the chord'),
-                  ])))
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Icon(Icons.search, size: 30, color: Colors.black),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  Text(_selectedNotes.length < 3
+                      ? 'Select the notes'
+                      : 'Find the chord'),
+                ],
+              ))),
+      // Padding
+      const Padding(padding: EdgeInsets.all(10)),
+      // Answer
+      Visibility(
+          visible: _answer.isEmpty ? false : true,
+          child: LimitedBox(
+            maxWidth: 30,
+            child: Container(
+                height: 40,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(color: Colors.blueAccent),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(_answer)),
+          )),
     ]);
   }
 
   Widget notesComboBox(int index) {
     return DropdownButton(
-      items: _notes
-          .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+      items: Symbol.values
+          .map((note) => DropdownMenuItem(
+                value: note,
+                alignment: AlignmentDirectional.center,
+                child: Text(note.toString().split('.').last),
+              ))
           .toList(),
       value: _selectedNotes[index],
-      onChanged: (String? note) {
+      isExpanded: true,
+      onChanged: (Symbol? note) {
         setState(() {
-          _selectedNotes[index] = note.toString();
+          _selectedNotes[index] = note!;
         });
       },
     );
