@@ -1,26 +1,10 @@
-enum Symbol {
-  C,
-  D,
-  E,
-  F,
-  G,
-  A,
-  B,
-}
+// Note { Symbol, Accidental }
 
-enum Accidental {
-  flat,
-  normal,
-  sharp,
-}
+enum Symbol { C, D, E, F, G, A, B }
 
-enum IntervalType {
-  unison,
-  major,
-  minor,
-  perfect,
-  augmented,
-}
+enum Accidental { flat, normal, sharp }
+
+// Interval { Name, Type }
 
 enum IntervalName {
   tonic,
@@ -30,4 +14,12 @@ enum IntervalName {
   fifth,
   sixth,
   seventh,
+}
+
+enum IntervalType {
+  unison,
+  major,
+  minor,
+  perfect,
+  augmented,
 }
