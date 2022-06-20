@@ -67,7 +67,7 @@ class _MyPage extends State<MyPage> {
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Visibility(
-          visible: _rowsCounter > 6 ? false : true,
+          visible: _rowsCounter > 3 ? false : true,
           child: addRowButton(),
         ),
         const Padding(padding: EdgeInsets.all(10)),
@@ -134,7 +134,7 @@ class _MyPage extends State<MyPage> {
 
   Widget answerBox() {
     return Container(
-        height: 200,
+        height: 340 - _rowsCounter * 30,
         alignment: Alignment.center,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -144,7 +144,9 @@ class _MyPage extends State<MyPage> {
         ),
         child: Text(
           _answer,
-          style: const TextStyle(fontSize: 80, fontStyle: FontStyle.italic),
+          style: TextStyle(
+              fontSize: _answer.length > 10 ? 30 : 100,
+              fontStyle: FontStyle.italic),
         ));
   }
 
