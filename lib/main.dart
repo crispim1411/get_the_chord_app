@@ -27,6 +27,14 @@ class _MyPage extends State<MyPage> {
   int _rowsCounter = 3;
   String _answer = '';
 
+  void restoreStatus() {
+    setState(() {
+      _selectedNotes.clear();
+      _rowsCounter = 3;
+      _answer = '';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +47,7 @@ class _MyPage extends State<MyPage> {
           IconButton(
             icon: const Icon(Icons.restore),
             padding: const EdgeInsets.only(right: 15),
-            onPressed: () {
-              setState(() {
-                _selectedNotes.clear();
-                _rowsCounter = 3;
-                _answer = '';
-              });
-            },
+            onPressed: restoreStatus,
           ),
         ],
       ),
