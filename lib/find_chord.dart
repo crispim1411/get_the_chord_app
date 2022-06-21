@@ -101,6 +101,7 @@ class Scale {
       [tonic, thirdMinor, fifthPerfect]: "m",
       [tonic, thirdMinor, sixthMajor]: "m6",
       [tonic, thirdMinor, fifthPerfect, sixthMajor]: "m6",
+      [tonic, thirdMinor, fifthPerfect, seventhMinor]: "m7",
       [tonic, thirdMinor, fifthPerfect, seventhMajor]: "m(maj7)",
       [tonic, thirdMinor, fourthAugmented, seventhMinor]: "m7(b5)",
       [tonic, thirdMinor, fourthAugmented]: "dim",
