@@ -89,8 +89,27 @@ class Scale {
   // listar demais acordes
   Map<List<Interval>, String> getChordShapes() {
     return {
+      // Acordes maiores
       [tonic, thirdMajor, fifthPerfect]: "",
+      [tonic, thirdMajor, fifthAugmented]: "aug",
+      [tonic, thirdMajor, fifthPerfect, sixthMajor]: "6",
+      [tonic, thirdMajor, fifthPerfect, seventhMajor]: "maj7",
+      [tonic, thirdMajor, fifthAugmented, seventhMajor]: "augM7",
+      [tonic, thirdMajor, fifthPerfect, seventhMinor]: "7",
+      [tonic, thirdMajor, fifthAugmented, seventhMinor]: "aug7",
+      // Acordes menores
       [tonic, thirdMinor, fifthPerfect]: "m",
+      [tonic, thirdMinor, sixthMajor]: "m6",
+      [tonic, thirdMinor, fifthPerfect, sixthMajor]: "m6",
+      [tonic, thirdMinor, fifthPerfect, seventhMinor]: "maj7",
+      [tonic, thirdMinor, fifthPerfect, seventhMajor]: "m(maj7)",
+      [tonic, thirdMinor, fourthAugmented, seventhMinor]: "m7(b5)",
+      [tonic, thirdMinor, fourthAugmented]: "dim",
+      [tonic, thirdMinor, fourthAugmented, sixthMajor]: "dim7",
+
+      // Acordes suspensos
+      [tonic, secondMajor, fifthPerfect]: "sus2",
+      [tonic, fourthPerfect, fifthPerfect]: "sus4",
     };
   }
 
