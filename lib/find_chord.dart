@@ -169,6 +169,11 @@ class Scale {
     if (chordString == null) return "No chord found";
 
     var chordSymbol = notes[0].symbol.toString().split('.').last;
-    return '$chordSymbol$chordString';
+
+    String chordAcc = '';
+    if (notes[0].accidental == Accidental.flat) chordAcc = 'b';
+    if (notes[0].accidental == Accidental.sharp) chordAcc = '#';
+
+    return '$chordSymbol$chordAcc$chordString';
   }
 }
