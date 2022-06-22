@@ -7,4 +7,4 @@ Quando se está lendo uma partitura, por exemplo, é possível identificar as no
 
 ## Aplicativo
 
-- imagem Android 
+![image](app-screenshot.jpg)
