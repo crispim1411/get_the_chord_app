@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'find_chord.dart';
-import 'models.dart';
+import 'models/enums.dart';
 
 void main() => runApp(const MyApp());
 
@@ -26,18 +27,15 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPage extends State<MyPage> {
-  final Map<int, Symbol> _selectedNotes = {};
+  final Map<int, Note> _selectedNotes = {};
   int _rowsCounter = 3;
   String _answer = '';
-
-  Accidental _accidental = Accidental.normal;
 
   void restoreStatus() {
     setState(() {
       _selectedNotes.clear();
       _rowsCounter = 3;
       _answer = '';
-      _accidental = Accidental.normal;
     });
   }
 
@@ -121,12 +119,8 @@ class _MyPage extends State<MyPage> {
                 ? null
                 : () {
                     setState(() {
-                      var notes = <Note>{};
-                      _selectedNotes.forEach((key, value) {
-                        // consertar duplicados
-                        notes.add(Note(value, _accidental));
-                      });
-                      _answer = Scale.getChord(notes.toList());
+                      _answer = Scale.getChord(
+                          _selectedNotes.values.toSet().toList());
                     });
                   },
             child: Text(
@@ -157,11 +151,14 @@ class _MyPage extends State<MyPage> {
               border: Border.all(),
               borderRadius: BorderRadius.circular(30),
             ),
-            child: Text(
-              _answer,
-              style: TextStyle(
-                  fontSize: _answer.length > 10 ? 30 : 80,
-                  fontStyle: FontStyle.italic),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: AutoSizeText(
+                _answer,
+                maxLines: 1,
+                style:
+                    const TextStyle(fontSize: 80, fontStyle: FontStyle.italic),
+              ),
             ),
           ),
         ),
@@ -171,46 +168,56 @@ class _MyPage extends State<MyPage> {
   }
 
   Widget notesSelector(int index) {
+    final flatSelected = _selectedNotes[index]?.accidental == Accidental.flat;
+    final sharpSelected = _selectedNotes[index]?.accidental == Accidental.sharp;
     return Row(
       children: [
         Expanded(
           child: DropdownButton(
             itemHeight: 60,
             items: Symbol.values
-                .map((note) => DropdownMenuItem(
-                      value: note,
+                .map((symbol) => DropdownMenuItem(
+                      value: symbol,
                       alignment: AlignmentDirectional.center,
-                      child: Text(note.toString().split('.').last,
+                      child: Text(symbol.toString().split('.').last,
                           style: const TextStyle(fontSize: 25)),
                     ))
                 .toList(),
-            value: _selectedNotes[index],
+            value: _selectedNotes[index]?.symbol,
             isExpanded: true,
-            onChanged: (Symbol? note) {
+            onChanged: (Symbol? symbol) {
               setState(() {
-                _selectedNotes[index] = note!;
+                _selectedNotes[index] = Note(symbol!, Accidental.normal);
               });
             },
           ),
         ),
         FilterChip(
           label: const Text('b'),
-          selected: _accidental == Accidental.flat,
-          onSelected: (bool value) {
-            setState(() {
-              _accidental = Accidental.flat;
-            });
-          },
+          selected: flatSelected,
+          onSelected:
+              [Symbol.C, Symbol.F].contains(_selectedNotes[index]?.symbol)
+                  ? null
+                  : (bool value) {
+                      setState(() {
+                        _selectedNotes[index]?.accidental =
+                            flatSelected ? Accidental.normal : Accidental.flat;
+                      });
+                    },
         ),
         FilterChip(
           label: const Text('#'),
-          selected: _accidental == Accidental.sharp,
-          onSelected: (bool value) {
-            setState(() {
-              _accidental = Accidental.sharp;
-            });
-          },
-        )
+          selected: sharpSelected,
+          onSelected: [Symbol.B, Symbol.E]
+                  .contains(_selectedNotes[index]?.symbol)
+              ? null
+              : (bool value) {
+                  setState(() {
+                    _selectedNotes[index]?.accidental =
+                        sharpSelected ? Accidental.normal : Accidental.sharp;
+                  });
+                },
+        ),
       ],
     );
   }

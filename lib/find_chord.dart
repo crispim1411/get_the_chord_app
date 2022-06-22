@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'models.dart';
+import 'models/enums.dart';
 
 class Note {
   Symbol symbol;
@@ -15,11 +15,15 @@ class Note {
   }
 
   @override
+  int get hashCode {
+    return symbol.hashCode ^ accidental.hashCode;
+  }
+
+  @override
   String toString() => '[$symbol, $accidental]';
 
   static Note getNextNote(Note note) {
     var index = note.symbol.index;
-
     Symbol nextSymbol =
         index == Symbol.values.length - 1 ? Symbol.C : Symbol.values[index + 1];
 
@@ -36,6 +40,23 @@ class Note {
             return Note(note.symbol, Accidental.sharp);
           }
         }
+    }
+  }
+
+  static Note getSharpEq(Note note) {
+    switch (note.symbol) {
+      case Symbol.D:
+        return Note(Symbol.C, Accidental.sharp);
+      case Symbol.E:
+        return Note(Symbol.D, Accidental.sharp);
+      case Symbol.G:
+        return Note(Symbol.F, Accidental.sharp);
+      case Symbol.A:
+        return Note(Symbol.G, Accidental.sharp);
+      case Symbol.B:
+        return Note(Symbol.A, Accidental.sharp);
+      default:
+        return note;
     }
   }
 }
@@ -71,6 +92,11 @@ class Scale {
   void fillUp(List<Note> notes) {
     Note tonic = notes[0];
     List<Note> scale = [];
+
+    if (tonic.accidental == Accidental.flat) {
+      tonic = Note.getSharpEq(tonic);
+    }
+
     var cursor = tonic;
     do {
       var nextNote = Note.getNextNote(cursor);
@@ -112,6 +138,9 @@ class Scale {
   List<Interval> getIntervals() {
     List<Interval> intervals = [];
     for (var note in notes) {
+      if (note.accidental == Accidental.flat) {
+        note = Note.getSharpEq(note);
+      }
       intervals.add(mapToInterval(note));
     }
     intervals.sort();
@@ -165,7 +194,6 @@ class Scale {
     if (chordString == null) return "No chord found";
 
     var chordSymbol = notes[0].symbol.toString().split('.').last;
-
     String chordAcc = '';
     if (notes[0].accidental == Accidental.flat) chordAcc = 'b';
     if (notes[0].accidental == Accidental.sharp) chordAcc = '#';
