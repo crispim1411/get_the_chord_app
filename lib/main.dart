@@ -30,11 +30,14 @@ class _MyPage extends State<MyPage> {
   int _rowsCounter = 3;
   String _answer = '';
 
+  Accidental _accidental = Accidental.normal;
+
   void restoreStatus() {
     setState(() {
       _selectedNotes.clear();
       _rowsCounter = 3;
       _answer = '';
+      _accidental = Accidental.normal;
     });
   }
 
@@ -66,7 +69,7 @@ class _MyPage extends State<MyPage> {
         ListView.builder(
           shrinkWrap: true,
           itemCount: _rowsCounter,
-          itemBuilder: (context, index) => notesComboBox(index),
+          itemBuilder: (context, index) => notesSelector(index),
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Visibility(
@@ -121,7 +124,7 @@ class _MyPage extends State<MyPage> {
                       var notes = <Note>{};
                       _selectedNotes.forEach((key, value) {
                         // consertar duplicados
-                        notes.add(Note(value, Accidental.normal));
+                        notes.add(Note(value, _accidental));
                       });
                       _answer = Scale.getChord(notes.toList());
                     });
@@ -167,24 +170,48 @@ class _MyPage extends State<MyPage> {
     );
   }
 
-  Widget notesComboBox(int index) {
-    return DropdownButton(
-      itemHeight: 60,
-      items: Symbol.values
-          .map((note) => DropdownMenuItem(
-                value: note,
-                alignment: AlignmentDirectional.center,
-                child: Text(note.toString().split('.').last,
-                    style: const TextStyle(fontSize: 25)),
-              ))
-          .toList(),
-      value: _selectedNotes[index],
-      isExpanded: true,
-      onChanged: (Symbol? note) {
-        setState(() {
-          _selectedNotes[index] = note!;
-        });
-      },
+  Widget notesSelector(int index) {
+    return Row(
+      children: [
+        Expanded(
+          child: DropdownButton(
+            itemHeight: 60,
+            items: Symbol.values
+                .map((note) => DropdownMenuItem(
+                      value: note,
+                      alignment: AlignmentDirectional.center,
+                      child: Text(note.toString().split('.').last,
+                          style: const TextStyle(fontSize: 25)),
+                    ))
+                .toList(),
+            value: _selectedNotes[index],
+            isExpanded: true,
+            onChanged: (Symbol? note) {
+              setState(() {
+                _selectedNotes[index] = note!;
+              });
+            },
+          ),
+        ),
+        FilterChip(
+          label: const Text('b'),
+          selected: _accidental == Accidental.flat,
+          onSelected: (bool value) {
+            setState(() {
+              _accidental = Accidental.flat;
+            });
+          },
+        ),
+        FilterChip(
+          label: const Text('#'),
+          selected: _accidental == Accidental.sharp,
+          onSelected: (bool value) {
+            setState(() {
+              _accidental = Accidental.sharp;
+            });
+          },
+        )
+      ],
     );
   }
 }
