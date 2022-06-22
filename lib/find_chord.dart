@@ -20,17 +20,15 @@ class Note {
   static Note getNextNote(Note note) {
     var index = note.symbol.index;
 
-    Symbol nextSymbol;
-    if (index == 6) {
-      nextSymbol = Symbol.C;
-    } else {
-      nextSymbol = Symbol.values[index + 1];
-    }
+    Symbol nextSymbol =
+        index == Symbol.values.length - 1 ? Symbol.C : Symbol.values[index + 1];
 
     switch (note.accidental) {
       case Accidental.flat:
         return Note(note.symbol, Accidental.normal);
-      case Accidental.normal:
+      case Accidental.sharp:
+        return Note(nextSymbol, Accidental.normal);
+      default:
         {
           if ([Symbol.E, Symbol.B].contains(note.symbol)) {
             return Note(nextSymbol, Accidental.normal);
@@ -38,8 +36,6 @@ class Note {
             return Note(note.symbol, Accidental.sharp);
           }
         }
-      case Accidental.sharp:
-        return Note(nextSymbol, Accidental.normal);
     }
   }
 }
