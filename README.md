@@ -7,4 +7,15 @@ Quando se está lendo uma partitura, por exemplo, é possível identificar as no
 
 ## Aplicativo
 
-![image](app-screenshot.jpg)
+<p float="left">
+<img src="images/main-page.jpg" alt="drawing" style="float: left; width: 45%; padding-left: 15px"/>
+<img src="images/info-page.jpg" alt="drawing" style="float: right; width: 45%; padding-right: 15px"/>
+</p>
+
+<br clear="left"/>
+<br>
+
+## Considerações 
+
+- Ainda necessário expandir para acordes invertidos e acordes extendidos
+- A experiẽncia com Dart não tem sido das melhores
