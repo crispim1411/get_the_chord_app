@@ -129,22 +129,26 @@ class _FormPage extends State<FormPage> {
         const Spacer(),
         Flexible(
           flex: 15,
-          child: Container(
-            height: 350 - _rowsCounter * 20,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Padding(
+          child: AnimatedSize(
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.bounceOut,
+            child: Container(
+              height: _answer.isEmpty ? 0 : (350 - _rowsCounter * 20),
+              alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
-              child: AutoSizeText(
-                _answer,
-                maxLines: 1,
-                style:
-                    const TextStyle(fontSize: 80, fontStyle: FontStyle.italic),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: AutoSizeText(
+                  _answer,
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontSize: 80, fontStyle: FontStyle.italic),
+                ),
               ),
             ),
           ),
