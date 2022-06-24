@@ -61,38 +61,35 @@ class _FormPage extends State<FormPage> {
           itemBuilder: (context, index) => notesSelector(index),
         ),
         const Padding(padding: EdgeInsets.all(10)),
-        Visibility(
-          visible: _rowsCounter > 3 ? false : true,
-          child: addRowButton(),
-        ),
+        addRowButton(),
         const Padding(padding: EdgeInsets.all(5)),
         searchButton(),
         const Padding(padding: EdgeInsets.all(10)),
-        Visibility(
-          visible: _answer.isEmpty ? false : true,
-          child: answerBox(),
-        ),
+        answerBox(),
       ],
     );
   }
 
   Widget addRowButton() {
-    return GestureDetector(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
-          Icon(Icons.add, size: 30),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Text('Add row', style: TextStyle(fontSize: 18)),
-          )
-        ],
+    return Visibility(
+      visible: _rowsCounter > 3 ? false : true,
+      child: GestureDetector(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [
+            Icon(Icons.add, size: 30),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text('Add row', style: TextStyle(fontSize: 18)),
+            )
+          ],
+        ),
+        onTap: () {
+          setState(() {
+            _rowsCounter += 1;
+          });
+        },
       ),
-      onTap: () {
-        setState(() {
-          _rowsCounter += 1;
-        });
-      },
     );
   }
 
@@ -116,7 +113,7 @@ class _FormPage extends State<FormPage> {
                   }
                 : null,
             child: Text(
-              isEnabled ? 'Select the notes' : 'Search the chord',
+              isEnabled ? 'Search the chord' : 'Select the notes',
               style: const TextStyle(fontSize: 18),
             ),
           ),
