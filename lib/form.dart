@@ -53,6 +53,7 @@ class _FormPage extends State<FormPage> {
   Widget bodyApp() {
     return ListView(
       padding: const EdgeInsets.all(20),
+      physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
         // Notes
         ListView.builder(
@@ -72,7 +73,7 @@ class _FormPage extends State<FormPage> {
 
   Widget addRowButton() {
     return Visibility(
-      visible: _rowsCounter > 3 ? false : true,
+      visible: _rowsCounter > 4 ? false : true,
       child: GestureDetector(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -133,7 +134,7 @@ class _FormPage extends State<FormPage> {
             duration: const Duration(milliseconds: 1000),
             curve: Curves.bounceOut,
             child: Container(
-              height: _answer.isEmpty ? 0 : (350 - _rowsCounter * 20),
+              height: _answer.isEmpty ? 0 : (350 - _rowsCounter * 30),
               alignment: Alignment.center,
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
