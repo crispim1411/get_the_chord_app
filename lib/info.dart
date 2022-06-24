@@ -6,7 +6,20 @@ class ChordInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Dicionário de acordes')),
+      appBar: AppBar(
+        title: const Text('Dicionário de acordes'),
+        bottom: const Tab(
+          height: 20,
+          child: Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: EdgeInsets.only(right: 15),
+              child: Text('by Crispim',
+                  style: TextStyle(fontStyle: FontStyle.italic)),
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
