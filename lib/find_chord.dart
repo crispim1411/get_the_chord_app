@@ -119,20 +119,32 @@ class Scale {
       [tonic, thirdMajor, fifthAugmented, seventhMajor]: "augM7",
       [tonic, thirdMajor, fifthPerfect, seventhMinor]: "7",
       [tonic, thirdMajor, fifthAugmented, seventhMinor]: "aug7",
+      [tonic, thirdMajor, fifthDiminished, seventhMinor]: "7b5",
       // Acordes menores
       [tonic, thirdMinor, fifthPerfect]: "m",
-      [tonic, thirdMinor, sixthMajor]: "m6",
       [tonic, thirdMinor, fifthPerfect, sixthMajor]: "m6",
       [tonic, thirdMinor, fifthPerfect, seventhMinor]: "m7",
       [tonic, thirdMinor, fifthPerfect, seventhMajor]: "mM7",
-      [tonic, thirdMinor, fourthAugmented, seventhMinor]: "m7(b5)",
-      [tonic, thirdMinor, fourthAugmented]: "dim",
-      [tonic, thirdMinor, fourthAugmented, sixthMajor]: "dim7",
-
+      [tonic, thirdMinor, fifthDiminished, seventhMinor]: "m7b5",
+      [tonic, thirdMinor, fifthDiminished]: "dim",
+      [tonic, thirdMinor, fifthDiminished, sixthMajor]: "dim7",
       // Acordes suspensos
+      [tonic, fifthPerfect]: "5",
       [tonic, secondMajor, fifthPerfect]: "sus2",
       [tonic, fourthPerfect, fifthPerfect]: "sus4",
-      [tonic, fifthPerfect]: "5",
+      [tonic, secondMajor, fifthPerfect, seventhMinor]: "7sus2",
+      [tonic, fourthPerfect, fifthPerfect, seventhMinor]: "7sus4",
+      [tonic, secondMajor, fourthPerfect, fifthPerfect, seventhMinor]: "9sus4",
+      // Acordes extendidos
+      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMajor]: "M9",
+      [tonic, secondMajor, thirdMinor, fifthPerfect, seventhMinor]: "m9",
+      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMinor]: "9",
+      [tonic, secondMajor, thirdMajor, fifthPerfect]: "add9",
+      [tonic, secondMajor, thirdMinor, fifthPerfect]: "m(add9)",
+      [tonic, thirdMajor, fourthPerfect, fifthPerfect]: "add11",
+      [tonic, thirdMinor, fourthPerfect, fifthPerfect]: "m(add11)",
+      [tonic, secondMajor, thirdMajor, fifthPerfect, sixthMajor]: "6/9",
+      [tonic, secondMajor, thirdMinor, fifthPerfect, sixthMajor]: "m6/9",
     };
   }
 

@@ -30,7 +30,9 @@ class ChordInfo extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
               minorChords(),
               const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
-              suspendedChords()
+              suspendedChords(),
+              const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
+              extendedChords(),
             ],
           ),
         ),
@@ -165,6 +167,12 @@ class ChordInfo extends StatelessWidget {
       rows: const <DataRow>[
         DataRow(
           cells: <DataCell>[
+            DataCell(Text('C5')),
+            DataCell(Text('C - G')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
             DataCell(Text('Csus2')),
             DataCell(Text('C - D - G')),
           ],
@@ -177,8 +185,89 @@ class ChordInfo extends StatelessWidget {
         ),
         DataRow(
           cells: <DataCell>[
-            DataCell(Text('C5')),
-            DataCell(Text('C - G')),
+            DataCell(Text('C7sus2')),
+            DataCell(Text('C - D - G - Bb')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('C7sus4')),
+            DataCell(Text('C - F - G - Bb')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('C9sus4')),
+            DataCell(Text('C - F - G - Bb - D')),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget extendedChords() {
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(
+          label: Text('Acordes Extendidos'),
+        ),
+        DataColumn(
+          label: Text('Notas'),
+        )
+      ],
+      rows: const <DataRow>[
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('CM9')),
+            DataCell(Text('C - E - G - B - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cm9')),
+            DataCell(Text('C - Eb - G - Bb - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('C9')),
+            DataCell(Text('C - E - G - Bb - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cadd9')),
+            DataCell(Text('C - E - G - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cm(add9)')),
+            DataCell(Text('C - Eb - G - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cadd11')),
+            DataCell(Text('C - E - G - F')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cm(add11)')),
+            DataCell(Text('C - Eb - G - F')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('C6/9')),
+            DataCell(Text('C - E - G - A - D')),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text('Cm6/9')),
+            DataCell(Text('C - Eb - G - A - D')),
           ],
         ),
       ],
