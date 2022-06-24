@@ -21,5 +21,6 @@ enum IntervalType {
   major,
   minor,
   perfect,
+  diminished,
   augmented,
 }

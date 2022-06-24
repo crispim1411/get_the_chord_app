@@ -79,7 +79,7 @@ class Scale {
   final thirdMinor = Interval(IntervalName.third, IntervalType.minor);
   final thirdMajor = Interval(IntervalName.third, IntervalType.major);
   final fourthPerfect = Interval(IntervalName.fourth, IntervalType.perfect);
-  final fourthAugmented = Interval(IntervalName.fourth, IntervalType.augmented);
+  final fifthDiminished = Interval(IntervalName.fifth, IntervalType.diminished);
   final fifthPerfect = Interval(IntervalName.fifth, IntervalType.perfect);
   final fifthAugmented = Interval(IntervalName.fifth, IntervalType.augmented);
   final sixthMajor = Interval(IntervalName.sixth, IntervalType.major);
@@ -164,7 +164,7 @@ class Scale {
       case 5:
         return fourthPerfect;
       case 6:
-        return fourthAugmented;
+        return fifthDiminished;
       case 7:
         return fifthPerfect;
       case 8:
