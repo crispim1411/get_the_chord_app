@@ -215,28 +215,22 @@ class _FormPage extends State<FormPage> {
         FilterChip(
           label: const Text('b'),
           selected: flatSelected,
-          onSelected:
-              [Symbol.C, Symbol.F].contains(_selectedNotes[index]?.symbol)
-                  ? null
-                  : (bool value) {
-                      setState(() {
-                        _selectedNotes[index]?.accidental =
-                            flatSelected ? Accidental.normal : Accidental.flat;
-                      });
-                    },
+          onSelected: (bool value) {
+            setState(() {
+              _selectedNotes[index]?.accidental =
+                  flatSelected ? Accidental.normal : Accidental.flat;
+            });
+          },
         ),
         FilterChip(
           label: const Text('#'),
           selected: sharpSelected,
-          onSelected: [Symbol.B, Symbol.E]
-                  .contains(_selectedNotes[index]?.symbol)
-              ? null
-              : (bool value) {
-                  setState(() {
-                    _selectedNotes[index]?.accidental =
-                        sharpSelected ? Accidental.normal : Accidental.sharp;
-                  });
-                },
+          onSelected: (bool value) {
+            setState(() {
+              _selectedNotes[index]?.accidental =
+                  sharpSelected ? Accidental.normal : Accidental.sharp;
+            });
+          },
         ),
       ],
     );

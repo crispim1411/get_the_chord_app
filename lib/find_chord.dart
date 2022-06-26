@@ -45,10 +45,14 @@ class Note {
 
   static Note getSharpEq(Note note) {
     switch (note.symbol) {
+      case Symbol.C:
+        return Note(Symbol.B, Accidental.normal);
       case Symbol.D:
         return Note(Symbol.C, Accidental.sharp);
       case Symbol.E:
         return Note(Symbol.D, Accidental.sharp);
+      case Symbol.F:
+        return Note(Symbol.E, Accidental.normal);
       case Symbol.G:
         return Note(Symbol.F, Accidental.sharp);
       case Symbol.A:
