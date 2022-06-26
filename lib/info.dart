@@ -1,276 +1,40 @@
 import 'package:flutter/material.dart';
 
-class ChordInfo extends StatelessWidget {
-  const ChordInfo({Key? key}) : super(key: key);
+class InfoPage extends StatelessWidget {
+  const InfoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dicionário de acordes'),
-        bottom: const Tab(
-          height: 20,
-          child: Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Text('by Crispim',
-                  style: TextStyle(fontStyle: FontStyle.italic)),
+      appBar: AppBar(title: const Text('Sobre')),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+            gradient:
+                LinearGradient(colors: [Colors.white, Colors.blue.shade100])),
+        child: Column(
+          children: <Widget>[
+            const Spacer(),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: const Image(
+                    image: AssetImage('assets/images/chord-icon.png'))),
+            const Spacer(),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              child: Text(
+                  'Quando está lendo uma partitura ou tablatura sente dificuldades '
+                  'em identificar o acorde resultante? Pois seus problemas acabaram!',
+                  style: TextStyle(fontSize: 20)),
             ),
-          ),
+            const Spacer(flex: 2),
+            const Text('- Crispim Corporations -',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const Spacer(flex: 2),
+          ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              majorChords(),
-              const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
-              minorChords(),
-              const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
-              suspendedChords(),
-              const Padding(padding: EdgeInsets.only(bottom: 10, top: 10)),
-              extendedChords(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget majorChords() {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text('Acordes Maiores'),
-        ),
-        DataColumn(
-          label: Text('Notas'),
-        )
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C')),
-            DataCell(Text('C - E - G')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Caug')),
-            DataCell(Text('C - E - G#')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C6')),
-            DataCell(Text('C - E - G - A')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cmaj7')),
-            DataCell(Text('C - E - G - B')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C7')),
-            DataCell(Text('C - E - G - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Caug7')),
-            DataCell(Text('C - E - G# - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('CaugM7')),
-            DataCell(Text('C - E - G# - B')),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget minorChords() {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text('Acordes Menores'),
-        ),
-        DataColumn(
-          label: Text('Notas'),
-        )
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm')),
-            DataCell(Text('C - Eb - G')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm6')),
-            DataCell(Text('C - Eb - G - A')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm7')),
-            DataCell(Text('C - Eb - G - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('CmM7')),
-            DataCell(Text('C - Eb - G - B')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm7(b5)')),
-            DataCell(Text('C - Eb - Gb - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cdim')),
-            DataCell(Text('C - Eb - Gb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cdim7')),
-            DataCell(Text('C - Eb - Gb - Bbb(A)')),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget suspendedChords() {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text('Acordes Suspensos'),
-        ),
-        DataColumn(
-          label: Text('Notas'),
-        )
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C5')),
-            DataCell(Text('C - G')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Csus2')),
-            DataCell(Text('C - D - G')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Csus4')),
-            DataCell(Text('C - F - G')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C7sus2')),
-            DataCell(Text('C - D - G - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C7sus4')),
-            DataCell(Text('C - F - G - Bb')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C9sus4')),
-            DataCell(Text('C - F - G - Bb - D')),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget extendedChords() {
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text('Acordes Extendidos'),
-        ),
-        DataColumn(
-          label: Text('Notas'),
-        )
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('CM9')),
-            DataCell(Text('C - E - G - B - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm9')),
-            DataCell(Text('C - Eb - G - Bb - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C9')),
-            DataCell(Text('C - E - G - Bb - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cadd9')),
-            DataCell(Text('C - E - G - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm(add9)')),
-            DataCell(Text('C - Eb - G - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cadd11')),
-            DataCell(Text('C - E - G - F')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm(add11)')),
-            DataCell(Text('C - Eb - G - F')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('C6/9')),
-            DataCell(Text('C - E - G - A - D')),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('Cm6/9')),
-            DataCell(Text('C - Eb - G - A - D')),
-          ],
-        ),
-      ],
     );
   }
 }

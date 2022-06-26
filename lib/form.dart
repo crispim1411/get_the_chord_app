@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'chord_dictionary.dart';
 import 'find_chord.dart';
 import 'info.dart';
 import 'models/enums.dart';
@@ -32,16 +33,19 @@ class _FormPage extends State<FormPage> {
         title: const Text('Get the chord'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.undo),
-            padding: const EdgeInsets.all(15),
-            onPressed: restoreStatus,
+            icon: const Icon(Icons.menu_book),
+            padding: const EdgeInsets.all(10),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const DictChordPage()));
+            },
           ),
           IconButton(
             icon: const Icon(Icons.info),
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ChordInfo()));
+                  MaterialPageRoute(builder: (context) => const InfoPage()));
             },
           ),
         ],
@@ -99,25 +103,49 @@ class _FormPage extends State<FormPage> {
     return Row(
       children: [
         const Spacer(),
-        Container(
-          height: 55,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: const Color.fromARGB(255, 230, 35, 35)),
-            onPressed: isEnabled
-                ? () {
-                    setState(() {
-                      _answer = Scale.getChord(
-                          _selectedNotes.values.toSet().toList());
-                    });
-                  }
-                : null,
-            child: Text(
-              isEnabled ? 'Search the chord' : 'Select the notes',
-              style: const TextStyle(fontSize: 18),
+        Wrap(
+          children: [
+            Container(
+              height: 55,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: const Color.fromARGB(255, 230, 35, 35)),
+                onPressed: isEnabled
+                    ? () {
+                        setState(() {
+                          _answer = Scale.getChord(
+                              _selectedNotes.values.toSet().toList());
+                        });
+                      }
+                    : null,
+                child: Text(
+                  isEnabled ? 'Search the chord' : 'Select the notes',
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
             ),
-          ),
+            Visibility(
+              visible: _answer.isNotEmpty,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Container(
+                  height: 55,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 10,
+                        primary: Colors.white,
+                        onPrimary: Colors.black),
+                    onPressed: restoreStatus,
+                    child: const Text('Clear', style: TextStyle(fontSize: 18)),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         const Spacer()
       ],
