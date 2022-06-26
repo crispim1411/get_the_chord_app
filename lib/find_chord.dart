@@ -63,6 +63,15 @@ class Note {
         return note;
     }
   }
+
+  static Note checkEnarmonics(Note note) {
+    if (note.accidental == Accidental.flat) return Note.getSharpEq(note);
+
+    if ([Symbol.B, Symbol.E].contains(note.symbol) &&
+        note.accidental == Accidental.sharp) return Note.getNextNote(note);
+
+    return note;
+  }
 }
 
 class Interval extends Comparable {
@@ -97,9 +106,7 @@ class Scale {
     Note tonic = notes[0];
     List<Note> scale = [];
 
-    if (tonic.accidental == Accidental.flat) {
-      tonic = Note.getSharpEq(tonic);
-    }
+    tonic = Note.checkEnarmonics(tonic);
 
     var cursor = tonic;
     do {
@@ -155,9 +162,7 @@ class Scale {
   List<Interval> getIntervals() {
     List<Interval> intervals = [];
     for (var note in notes) {
-      if (note.accidental == Accidental.flat) {
-        note = Note.getSharpEq(note);
-      }
+      note = Note.checkEnarmonics(note);
       intervals.add(mapToInterval(note));
     }
     intervals.sort();
