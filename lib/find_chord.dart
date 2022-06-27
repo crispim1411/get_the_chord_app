@@ -147,7 +147,7 @@ class Scale {
       [tonic, fourthPerfect, fifthPerfect, seventhMinor]: "7sus4",
       [tonic, secondMajor, fourthPerfect, fifthPerfect, seventhMinor]: "9sus4",
       // Acordes extendidos
-      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMajor]: "M9",
+      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMajor]: "maj9",
       [tonic, secondMajor, thirdMinor, fifthPerfect, seventhMinor]: "m9",
       [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMinor]: "9",
       [tonic, secondMajor, thirdMajor, fifthPerfect]: "add9",
