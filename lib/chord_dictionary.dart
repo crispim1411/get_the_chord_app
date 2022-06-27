@@ -23,6 +23,7 @@ class DictChordPage extends StatelessWidget {
               ],
             )),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             majorChords(),
             minorChords(),
