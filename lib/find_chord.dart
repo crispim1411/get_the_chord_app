@@ -20,7 +20,15 @@ class Note {
   }
 
   @override
-  String toString() => '[$symbol, $accidental]';
+  String toString() {
+    String chordAcc = '';
+    if (accidental == Accidental.flat) {
+      chordAcc = 'b';
+    } else if (accidental == Accidental.sharp) {
+      chordAcc = '#';
+    }
+    return '${symbol.toString().split('.').last}$chordAcc';
+  }
 
   static Note getNextNote(Note note) {
     var index = note.symbol.index;
@@ -156,7 +164,27 @@ class Scale {
       [tonic, thirdMinor, fourthPerfect, fifthPerfect]: "m(add11)",
       [tonic, secondMajor, thirdMajor, fifthPerfect, sixthMajor]: "6/9",
       [tonic, secondMajor, thirdMinor, fifthPerfect, sixthMajor]: "m6/9",
+      // Acordes invertidos
+      [tonic, thirdMinor, fifthAugmented]: "major 1st inversion",
+      [tonic, fourthPerfect, sixthMajor]: "major 2st inversion",
+      [tonic, thirdMajor, sixthMajor]: "minor 1st inversion",
+      [tonic, fourthPerfect, fifthAugmented]: "minor 2st inversion",
     };
+  }
+
+  String getInversionString(String inv) {
+    switch (inv) {
+      case 'major 1st inversion':
+        return '${scale[8].toString()}/${scale[0].toString()}';
+      case 'major 2st inversion':
+        return '${scale[5].toString()}/${scale[0].toString()}';
+      case 'minor 1st inversion':
+        return '${scale[9].toString()}m/${scale[0].toString()}';
+      case 'minor 2st inversion':
+        return '${scale[5].toString()}m/${scale[0].toString()}';
+      default:
+        return inv;
+    }
   }
 
   List<Interval> getIntervals() {
@@ -207,14 +235,16 @@ class Scale {
     var intervals = scale.getIntervals();
     var chordShapes = scale.getChordShapes();
 
-    String? chordString;
-    chordShapes.forEach((key, value) {
-      if (listEquals(key, intervals)) {
-        chordString = value;
+    String chordString = '';
+    for (var pair in chordShapes.entries) {
+      if (listEquals(pair.key, intervals)) {
+        chordString = pair.value;
+        break;
       }
-    });
-    if (chordString == null) return "No chord found";
-
+    }
+    if (chordString.contains('inversion')) {
+      return scale.getInversionString(chordString);
+    } else if (chordString.isEmpty) return "No chord found";
     var chordSymbol = notes[0].symbol.toString().split('.').last;
     String chordAcc = '';
     if (notes[0].accidental == Accidental.flat) chordAcc = 'b';

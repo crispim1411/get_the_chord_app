@@ -14,8 +14,3 @@ Quando se está lendo uma partitura, por exemplo, é possível identificar as no
 
 <br clear="left"/>
 <br>
-
-## Considerações 
-
-- Ainda necessário expandir para acordes invertidos e acordes extendidos
-- A experiẽncia com Dart não tem sido das melhores
