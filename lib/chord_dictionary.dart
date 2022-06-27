@@ -98,6 +98,7 @@ class DictChordPage extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.all(10)),
             DataTable(
+              columnSpacing: 120,
               columns: const <DataColumn>[
                 DataColumn(
                   label: Text('Exemplo'),
@@ -221,6 +222,7 @@ class DictChordPage extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.all(10)),
             DataTable(
+              columnSpacing: 120,
               columns: const <DataColumn>[
                 DataColumn(
                   label: Text('Exemplo'),
@@ -330,7 +332,7 @@ class DictChordPage extends StatelessWidget {
                 ),
                 DataRow(
                   cells: <DataCell>[
-                    DataCell(Text('Quarta suspensa com nona')),
+                    DataCell(Text('Quarta suspensa c/ nona')),
                     DataCell(Text('T - 4J - 5J - 7m - 9')),
                   ],
                 ),
@@ -338,6 +340,7 @@ class DictChordPage extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.all(10)),
             DataTable(
+              columnSpacing: 110,
               columns: const <DataColumn>[
                 DataColumn(
                   label: Text('Exemplo'),
