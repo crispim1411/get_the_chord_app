@@ -126,22 +126,19 @@ class _FormPage extends State<FormPage> {
                 ),
               ),
             ),
-            Visibility(
-              visible: _answer.isNotEmpty,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  height: 55,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        elevation: 10,
-                        primary: Colors.white,
-                        onPrimary: Colors.black),
-                    onPressed: restoreStatus,
-                    child: const Text('Clear', style: TextStyle(fontSize: 18)),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Container(
+                height: 55,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      elevation: 10,
+                      primary: Colors.white,
+                      onPrimary: Colors.black),
+                  onPressed: restoreStatus,
+                  child: const Text('Clear', style: TextStyle(fontSize: 18)),
                 ),
               ),
             ),
@@ -194,6 +191,7 @@ class _FormPage extends State<FormPage> {
       children: [
         Expanded(
           child: DropdownButton(
+            hint: index == 0 ? const Text('Tonic') : null,
             itemHeight: 60,
             items: Symbol.values
                 .map((symbol) => DropdownMenuItem(
