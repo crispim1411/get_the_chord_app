@@ -121,7 +121,7 @@ class _FormPage extends State<FormPage> {
                       }
                     : null,
                 child: Text(
-                  isEnabled ? 'Search the chord' : 'Select the notes',
+                  isEnabled ? 'Pesquisar acorde' : 'Selecione as notas',
                   style: const TextStyle(fontSize: 18),
                 ),
               ),
@@ -138,7 +138,7 @@ class _FormPage extends State<FormPage> {
                       primary: Colors.white,
                       onPrimary: Colors.black),
                   onPressed: restoreStatus,
-                  child: const Text('Clear', style: TextStyle(fontSize: 18)),
+                  child: const Text('Limpar', style: TextStyle(fontSize: 18)),
                 ),
               ),
             ),
@@ -191,7 +191,7 @@ class _FormPage extends State<FormPage> {
       children: [
         Expanded(
           child: DropdownButton(
-            hint: index == 0 ? const Text('Tonic') : null,
+            hint: index == 0 ? const Text('Nota mais grave aqui...') : null,
             itemHeight: 60,
             items: Symbol.values
                 .map((symbol) => DropdownMenuItem(
