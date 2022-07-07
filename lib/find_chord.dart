@@ -235,16 +235,19 @@ class Scale {
     var intervals = scale.getIntervals();
     var chordShapes = scale.getChordShapes();
 
-    String chordString = '';
+    String? chordString;
     for (var pair in chordShapes.entries) {
       if (listEquals(pair.key, intervals)) {
         chordString = pair.value;
         break;
       }
     }
+    if (chordString == null) return "Nenhum acorde encontrado";
+
     if (chordString.contains('inversion')) {
       return scale.getInversionString(chordString);
-    } else if (chordString.isEmpty) return "No chord found";
+    }
+
     var chordSymbol = notes[0].symbol.toString().split('.').last;
     String chordAcc = '';
     if (notes[0].accidental == Accidental.flat) chordAcc = 'b';
