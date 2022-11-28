@@ -8,8 +8,8 @@ Quando se está lendo uma partitura, por exemplo, é possível identificar as no
 ## Aplicativo
 
 <p float="left">
-<img src="images/main-page.jpg" alt="drawing" style="float: left; width: 45%; padding-left: 15px"/>
-<img src="images/info-page.jpg" alt="drawing" style="float: right; width: 45%; padding-right: 15px"/>
+<img src="images/tela-inicial.jpg" alt="drawing" style="float: left; width: 40%; padding-left: 15px"/>
+<img src="images/intervalos.jpg" alt="drawing" style="float: right; width: 40%; padding-right: 15px"/>
 </p>
 
 <br clear="left"/>
