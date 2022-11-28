@@ -5,6 +5,9 @@ Aplicação em Flutter desenvolvida para plataforma Android implementando o algo
 
 Quando se está lendo uma partitura, por exemplo, é possível identificar as notas mas nem sempre entender o acorde resultante rapidamente. Com intuito de exercitar a programação de aplicativos foi então desenvolvido este projeto tendo como base o algoritmo escrito em Rust.
 
+## Release
+Caso deseja testar, arquivo .apk se encontra disponível para download em [release versão 1.0](https://github.com/crispim1411/get_the_chord_app/releases/tag/version_1.0)
+
 ## Aplicativo
 
 <p float="left">
