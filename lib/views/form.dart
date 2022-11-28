@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'chord_dictionary.dart';
-import 'find_chord.dart';
 import 'info.dart';
-import 'models/enums.dart';
+import 'chord_dictionary.dart';
+import '../find_chord.dart';
+import '../models/enums.dart';
+
 
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);

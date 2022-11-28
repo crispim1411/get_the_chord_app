@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'form.dart';
+import 'views/form.dart';
 
 void main() => runApp(const MyApp());
 
