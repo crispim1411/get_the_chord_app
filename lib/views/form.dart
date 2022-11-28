@@ -112,7 +112,7 @@ class _FormPage extends State<FormPage> {
                   BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: const Color.fromARGB(255, 230, 35, 35)),
+                    backgroundColor: const Color.fromARGB(255, 230, 35, 35)),
                 onPressed: isEnabled
                     ? () {
                         setState(() {
@@ -135,9 +135,9 @@ class _FormPage extends State<FormPage> {
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      elevation: 10,
-                      primary: Colors.white,
-                      onPrimary: Colors.black),
+                      foregroundColor: Colors.black, 
+                      backgroundColor: Colors.white, 
+                      elevation: 10),
                   onPressed: restoreStatus,
                   child: const Text('Limpar', style: TextStyle(fontSize: 18)),
                 ),
