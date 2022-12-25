@@ -31,23 +31,17 @@ class _FormPage extends State<FormPage> {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.music_note),
-        title: const Text('Get the chord'),
+        title: const Text('Get the Chord'),
         actions: [
           IconButton(
             icon: const Icon(Icons.menu_book),
             padding: const EdgeInsets.all(10),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const DictChordPage()));
-            },
+            onPressed: () => Navigator.of(context).pushNamed('/dict'),
           ),
           IconButton(
             icon: const Icon(Icons.info),
             padding: const EdgeInsets.all(10),
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const InfoPage()));
-            },
+            onPressed: () => Navigator.of(context).pushNamed('/about'),
           ),
         ],
       ),
