@@ -3,7 +3,7 @@
    <application
         android:label="Get the Chord"
         android:name="${applicationName}"
-        android:icon="@mipmap/chord_icon">
+        android:icon="@mipmap/get_the_chord">
         <activity
             android:name=".MainActivity"
             android:exported="true"

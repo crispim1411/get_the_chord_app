@@ -19,7 +19,7 @@ class InfoPage extends StatelessWidget {
             ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: const Image(
-                    image: AssetImage('assets/images/chord-icon.png'))),
+                    image: AssetImage('assets/images/app_icon.png'))),
             const Spacer(),
             const Padding(
               padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
