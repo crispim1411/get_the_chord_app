@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'models/enums.dart';
+import 'enums.dart';
 
 class Note {
   Symbol symbol;

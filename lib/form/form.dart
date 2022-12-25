@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'info.dart';
-import 'chord_dictionary.dart';
-import '../find_chord.dart';
-import '../models/enums.dart';
-
+import '../about/about_view.dart';
+import '../dictionary/chord_dictionary.dart';
+import 'find_chord.dart';
+import 'enums.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
@@ -34,11 +33,13 @@ class _FormPage extends State<FormPage> {
         title: const Text('Get the Chord'),
         actions: [
           IconButton(
+            key: const Key('navDict'),
             icon: const Icon(Icons.menu_book),
             padding: const EdgeInsets.all(10),
             onPressed: () => Navigator.of(context).pushNamed('/dict'),
           ),
           IconButton(
+            key: const Key('navAbout'),
             icon: const Icon(Icons.info),
             padding: const EdgeInsets.all(10),
             onPressed: () => Navigator.of(context).pushNamed('/about'),
@@ -51,6 +52,7 @@ class _FormPage extends State<FormPage> {
 
   Widget bodyApp() {
     return ListView(
+      key: const Key('FormPage'),
       padding: const EdgeInsets.all(20),
       physics: const NeverScrollableScrollPhysics(),
       children: <Widget>[
@@ -129,8 +131,8 @@ class _FormPage extends State<FormPage> {
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, 
-                      backgroundColor: Colors.white, 
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.white,
                       elevation: 10),
                   onPressed: restoreStatus,
                   child: const Text('Limpar', style: TextStyle(fontSize: 18)),

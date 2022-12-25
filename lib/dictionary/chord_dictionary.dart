@@ -12,29 +12,26 @@ class DictChordPage extends StatelessWidget {
         appBar: AppBar(
             title: const Text('Dicionário de acordes'),
             bottom: TabBar(
-              isScrollable: true,
-              labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              labelColor: Colors.black,
-              tabs: dictList.entries
-                .map((entry) => Tab(text: entry.key))
-                .toList()
-            )),
+                isScrollable: true,
+                labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                labelColor: Colors.black,
+                tabs: dictList.entries
+                    .map((entry) => Tab(text: entry.key))
+                    .toList())),
         body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: dictList.entries
-            .map((entry) => createChordTable(entry))
-            .toList()                           
-        ),
+            key: const Key('DictPage'),
+            physics: const NeverScrollableScrollPhysics(),
+            children: dictList.entries
+                .map((entry) => createChordTable(entry))
+                .toList()),
       ),
     );
   }
 
   Widget createChordTable(MapEntry<String, dynamic> entry) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          DataTable(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        DataTable(
             columnSpacing: 0,
             columns: [
               DataColumn(
@@ -44,17 +41,13 @@ class DictChordPage extends StatelessWidget {
                 label: Text('Intervalos'),
               )
             ],
-            rows: entry.value['intervals'].entries.map<DataRow>((i) =>
-              DataRow(
-                cells: [
-                  DataCell(Text(i.key)),
-                  DataCell(Text(i.value))
-                ],
-              )
-            ).toList()
-          ),
-          const Padding(padding: EdgeInsets.all(10)),
-          DataTable(
+            rows: entry.value['intervals'].entries
+                .map<DataRow>((i) => DataRow(
+                      cells: [DataCell(Text(i.key)), DataCell(Text(i.value))],
+                    ))
+                .toList()),
+        const Padding(padding: EdgeInsets.all(10)),
+        DataTable(
             columnSpacing: 0,
             columns: const [
               DataColumn(
@@ -66,16 +59,11 @@ class DictChordPage extends StatelessWidget {
             ],
             rows: entry.value['examples'].entries.map<DataRow>((i) {
               return DataRow(
-                cells: [
-                  DataCell(Text(i.key)),
-                  DataCell(Text(i.value))
-                ],
+                cells: [DataCell(Text(i.key)), DataCell(Text(i.value))],
               );
-            }).toList()
-          ),
-          const Padding(padding: EdgeInsets.all(15)),
-        ]
-      ),
+            }).toList()),
+        const Padding(padding: EdgeInsets.all(15)),
+      ]),
     );
   }
 }

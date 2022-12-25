@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     return MaterialApp(
-      title: 'Get the chord',
-      home: const FormPage(),
+      title: 'Get the Chord',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.yellow[300],
@@ -31,9 +30,9 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-  // routes
-  // theme colors
-  // uncople logic from view
-  // Model - View - Presenter
-  // unitary tests
+  // [X] routes
+  // [] theme colors
+  // [] uncople logic from view
+  // [] Model - View - Presenter
+  // [] unitary tests
 }

@@ -8,6 +8,7 @@ class InfoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sobre')),
       body: Container(
+        key: const Key('AboutPage'),
         constraints: const BoxConstraints.expand(),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
