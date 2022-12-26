@@ -14,7 +14,6 @@ class DictChordPage extends StatelessWidget {
             bottom: TabBar(
                 isScrollable: true,
                 labelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                labelColor: Colors.black,
                 tabs: dictList.entries
                     .map((entry) => Tab(text: entry.key))
                     .toList())),

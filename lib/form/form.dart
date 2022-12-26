@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import '../about/about_view.dart';
-import '../dictionary/chord_dictionary.dart';
+
 import 'find_chord.dart';
 import 'enums.dart';
 
@@ -107,8 +106,6 @@ class _FormPage extends State<FormPage> {
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 230, 35, 35)),
                 onPressed: isEnabled
                     ? () {
                         setState(() {
@@ -130,10 +127,6 @@ class _FormPage extends State<FormPage> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      backgroundColor: Colors.white,
-                      elevation: 10),
                   onPressed: restoreStatus,
                   child: const Text('Limpar', style: TextStyle(fontSize: 18)),
                 ),

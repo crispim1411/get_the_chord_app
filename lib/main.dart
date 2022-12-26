@@ -21,13 +21,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Get the Chord',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.yellow[300],
-          foregroundColor: Colors.black,
-        ),
-        primaryColor: Colors.red,
-      ),
+      theme: _appTheme,
       initialRoute: '/',
       routes: {
         '/': (_) => const FormPage(),
@@ -37,8 +31,23 @@ class MyApp extends StatelessWidget {
     );
   }
   // [X] routes
-  // [] theme colors
-  // [] uncople logic from view
-  // [] Model - View - Presenter
-  // [] unitary tests
+  // [x] theme colors
+  // [ ] Model - View - Presenter
+  //   [X] Folders
+  //   [ ] Decoupling logic from view
+  // [ ] unitary tests
+  //   [X] pages
+  //   [ ] chord search
+  //   [ ]
 }
+
+final _appTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.yellow[300],
+    foregroundColor: Colors.black,
+  ),
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: Colors.indigo,
+  ),
+  tabBarTheme: const TabBarTheme(labelColor: Colors.black),
+);
