@@ -1,41 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-class InfoPage extends StatelessWidget {
-  const InfoPage({Key? key}) : super(key: key);
+import 'package:get_chord_app/config.dart';
+
+class AboutPage extends StatelessWidget {
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Sobre')),
-      body: Container(
-        key: const Key('AboutPage'),
-        constraints: const BoxConstraints.expand(),
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-            gradient:
-                LinearGradient(colors: [Colors.white, Colors.blue.shade100])),
-        child: Column(
-          children: <Widget>[
-            const Spacer(),
-            ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: const Image(
-                    image: AssetImage('assets/images/app_icon.png'))),
-            const Spacer(),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-              child: Text(
-                  'Quando está lendo uma partitura ou tablatura sente dificuldades '
-                  'em identificar o acorde resultante? Pois seus problemas acabaram!',
-                  style: TextStyle(fontSize: 20)),
-            ),
-            const Spacer(flex: 2),
-            const Text('- Crispim Corporations -',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const Spacer(flex: 2),
-          ],
-        ),
-      ),
+      body: _about(),
     );
+  }
+
+  Widget _about() {
+    final header = Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: Config.appIcon.image,
+                )),
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(Config.appName, style: TextStyle(fontSize: 18)),
+            Text(
+              Config.kPackageInfo.version,
+              style: const TextStyle(fontSize: 15),
+            ),
+          ],
+        )
+      ],
+    );
+
+    final listTiles = [
+      const ListTile(title: Text(Config.appDescription)),
+      const Divider(),
+      ListTile(
+        leading: const Icon(Icons.code),
+        title: const Text('Source code on GitHub'),
+        onTap: () => url_launcher.launchUrl(Uri.parse(Config.githubUrl)),
+      ),
+      ListTile(
+        leading: const Icon(Icons.bug_report),
+        title: const Text('Report issue on GitHub'),
+        onTap: () =>
+            url_launcher.launchUrl(Uri.parse('${Config.githubUrl}/issues')),
+      ),
+      const ListTile(),
+      const ListTile(
+        title: Text(
+          '- Crispim Corporations -',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+      )
+    ];
+
+    return ListView(children: [header, ...listTiles]);
   }
 }

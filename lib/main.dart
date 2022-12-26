@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_chord_app/views/chord_dictionary.dart';
-import 'package:get_chord_app/views/info.dart';
-import 'views/form.dart';
+import 'package:get_chord_app/config.dart';
+import 'package:get_chord_app/dictionary/chord_dictionary.dart';
+import 'package:get_chord_app/about/about_view.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'form/form.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Config.kPackageInfo = await PackageInfo.fromPlatform();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (_) => const FormPage(),
         '/dict': (_) => const DictChordPage(),
-        '/about': (_) => const InfoPage()
+        '/about': (_) => const AboutPage()
       },
     );
   }
