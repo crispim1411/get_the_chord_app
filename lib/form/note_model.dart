@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'enums.dart';
 
-class Note {
+class NoteModel {
   Symbol symbol;
   Accidental accidental;
 
-  Note(this.symbol, this.accidental);
+  NoteModel(this.symbol, this.accidental);
 
   @override
   bool operator ==(other) {
-    return (other is Note) &&
+    return (other is NoteModel) &&
         other.symbol == symbol &&
         other.accidental == accidental;
   }
@@ -30,53 +30,53 @@ class Note {
     return '${symbol.toString().split('.').last}$chordAcc';
   }
 
-  static Note getNextNote(Note note) {
+  static NoteModel getNextNote(NoteModel note) {
     var index = note.symbol.index;
     Symbol nextSymbol =
         index == Symbol.values.length - 1 ? Symbol.C : Symbol.values[index + 1];
 
     switch (note.accidental) {
       case Accidental.flat:
-        return Note(note.symbol, Accidental.normal);
+        return NoteModel(note.symbol, Accidental.normal);
       case Accidental.sharp:
-        return Note(nextSymbol, Accidental.normal);
+        return NoteModel(nextSymbol, Accidental.normal);
       default:
         {
           if ([Symbol.E, Symbol.B].contains(note.symbol)) {
-            return Note(nextSymbol, Accidental.normal);
+            return NoteModel(nextSymbol, Accidental.normal);
           } else {
-            return Note(note.symbol, Accidental.sharp);
+            return NoteModel(note.symbol, Accidental.sharp);
           }
         }
     }
   }
 
-  static Note getSharpEq(Note note) {
+  static NoteModel getSharpEq(NoteModel note) {
     switch (note.symbol) {
       case Symbol.C:
-        return Note(Symbol.B, Accidental.normal);
+        return NoteModel(Symbol.B, Accidental.normal);
       case Symbol.D:
-        return Note(Symbol.C, Accidental.sharp);
+        return NoteModel(Symbol.C, Accidental.sharp);
       case Symbol.E:
-        return Note(Symbol.D, Accidental.sharp);
+        return NoteModel(Symbol.D, Accidental.sharp);
       case Symbol.F:
-        return Note(Symbol.E, Accidental.normal);
+        return NoteModel(Symbol.E, Accidental.normal);
       case Symbol.G:
-        return Note(Symbol.F, Accidental.sharp);
+        return NoteModel(Symbol.F, Accidental.sharp);
       case Symbol.A:
-        return Note(Symbol.G, Accidental.sharp);
+        return NoteModel(Symbol.G, Accidental.sharp);
       case Symbol.B:
-        return Note(Symbol.A, Accidental.sharp);
+        return NoteModel(Symbol.A, Accidental.sharp);
       default:
         return note;
     }
   }
 
-  static Note checkEnarmonics(Note note) {
-    if (note.accidental == Accidental.flat) return Note.getSharpEq(note);
+  static NoteModel checkEnarmonics(NoteModel note) {
+    if (note.accidental == Accidental.flat) return NoteModel.getSharpEq(note);
 
     if ([Symbol.B, Symbol.E].contains(note.symbol) &&
-        note.accidental == Accidental.sharp) return Note.getNextNote(note);
+        note.accidental == Accidental.sharp) return NoteModel.getNextNote(note);
 
     return note;
   }
@@ -107,18 +107,18 @@ class Scale {
   final seventhMinor = Interval(IntervalName.seventh, IntervalType.minor);
   final seventhMajor = Interval(IntervalName.seventh, IntervalType.major);
 
-  List<Note> notes = [];
-  List<Note> scale = [];
+  List<NoteModel> notes = [];
+  List<NoteModel> scale = [];
 
-  void fillUp(List<Note> notes) {
-    Note tonic = notes[0];
-    List<Note> scale = [];
+  void fillUp(List<NoteModel> notes) {
+    NoteModel tonic = notes[0];
+    List<NoteModel> scale = [];
 
-    tonic = Note.checkEnarmonics(tonic);
+    tonic = NoteModel.checkEnarmonics(tonic);
 
     var cursor = tonic;
     do {
-      var nextNote = Note.getNextNote(cursor);
+      var nextNote = NoteModel.getNextNote(cursor);
       scale.add(cursor);
       cursor = nextNote;
     } while (cursor != tonic);
@@ -190,14 +190,14 @@ class Scale {
   List<Interval> getIntervals() {
     List<Interval> intervals = [];
     for (var note in notes) {
-      note = Note.checkEnarmonics(note);
+      note = NoteModel.checkEnarmonics(note);
       intervals.add(mapToInterval(note));
     }
     intervals.sort();
     return intervals;
   }
 
-  Interval mapToInterval(Note note) {
+  Interval mapToInterval(NoteModel note) {
     var index = scale.indexOf(note);
     switch (index) {
       case 0:
@@ -229,7 +229,7 @@ class Scale {
     }
   }
 
-  static String getChord(List<Note> notes) {
+  static String getChord({required List<NoteModel> notes}) {
     var scale = Scale();
     scale.fillUp(notes);
     var intervals = scale.getIntervals();

@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get_chord_app/config.dart';
 import 'package:get_chord_app/dictionary/chord_dictionary.dart';
 import 'package:get_chord_app/about/about_view.dart';
+import 'package:get_chord_app/home/home_view.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'form/form.dart';
+import 'form/form_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Get the Chord',
       theme: _appTheme,
-      initialRoute: '/',
+      home: const HomeView(),
       routes: {
-        '/': (_) => const FormPage(),
         '/dict': (_) => const DictChordPage(),
         '/about': (_) => const AboutPage()
       },
@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
   }
   // [X] routes
   // [x] theme colors
-  // [ ] Model - View - Presenter
+  // [X] Model - View - ViewModel
   //   [X] Folders
-  //   [ ] Decoupling logic from view
+  //   [X] Decoupling logic from view
   // [ ] unitary tests
   //   [X] pages
   //   [ ] chord search
