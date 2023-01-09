@@ -148,31 +148,33 @@ class _FormPage extends State<FormView> {
           ),
         ),
         Visibility(
-          visible: ![Symbol.F, Symbol.C].contains(note?.symbol),
           maintainAnimation: true,
           maintainState: true,
           maintainSize: true,
           child: FilterChip(
             label: const Text('b'),
             selected: flatSelected,
-            onSelected: (value) {
-              _model.setAccident(
-                  index, value ? Accidental.flat : Accidental.normal);
-            },
+            onSelected: [Symbol.F, Symbol.C].contains(note?.symbol)
+                ? null
+                : (value) {
+                    _model.setAccident(
+                        index, value ? Accidental.flat : Accidental.normal);
+                  },
           ),
         ),
         Visibility(
-          visible: ![Symbol.E, Symbol.B].contains(note?.symbol),
           maintainAnimation: true,
           maintainState: true,
           maintainSize: true,
           child: FilterChip(
             label: const Text('#'),
             selected: sharpSelected,
-            onSelected: (value) {
-              _model.setAccident(
-                  index, value ? Accidental.sharp : Accidental.normal);
-            },
+            onSelected: [Symbol.E, Symbol.B].contains(note?.symbol)
+                ? null
+                : (value) {
+                    _model.setAccident(
+                        index, value ? Accidental.sharp : Accidental.normal);
+                  },
           ),
         ),
       ],
