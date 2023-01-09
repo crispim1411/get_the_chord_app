@@ -36,7 +36,9 @@ class FormViewModel extends ChangeNotifier {
   }
 
   void setAnswer() {
-    answer = Scale.getChord(notes: selectedNotes.values.toSet().toList());
+    var notes = selectedNotes.values.toSet().toList();
+    var scale = Scale.from(notes);
+    answer = scale.getChord();
     notifyListeners();
   }
 }

@@ -107,10 +107,55 @@ class Scale {
   final seventhMinor = Interval(IntervalName.seventh, IntervalType.minor);
   final seventhMajor = Interval(IntervalName.seventh, IntervalType.major);
 
-  List<NoteModel> notes = [];
-  List<NoteModel> scale = [];
+  // listar demais acordes
+  late final Map<List<Interval>, String> chordShapes = {
+    // Acordes maiores
+    [tonic, thirdMajor, fifthPerfect]: "",
+    [tonic, thirdMajor, fifthAugmented]: "aug",
+    [tonic, thirdMajor, fifthPerfect, sixthMajor]: "6",
+    [tonic, thirdMajor, fifthPerfect, seventhMajor]: "maj7",
+    [tonic, thirdMajor, fifthAugmented, seventhMajor]: "augM7",
+    [tonic, thirdMajor, fifthPerfect, seventhMinor]: "7",
+    [tonic, thirdMajor, fifthAugmented, seventhMinor]: "aug7",
+    [tonic, thirdMajor, fifthDiminished, seventhMinor]: "7b5",
+    // Acordes menores
+    [tonic, thirdMinor, fifthPerfect]: "m",
+    [tonic, thirdMinor, fifthPerfect, sixthMajor]: "m6",
+    [tonic, thirdMinor, fifthPerfect, seventhMinor]: "m7",
+    [tonic, thirdMinor, fifthPerfect, seventhMajor]: "mM7",
+    [tonic, thirdMinor, fifthDiminished, seventhMinor]: "m7b5",
+    [tonic, thirdMinor, fifthDiminished]: "dim",
+    [tonic, thirdMinor, fifthDiminished, sixthMajor]: "dim7",
+    // Acordes suspensos
+    [tonic, fifthPerfect]: "5",
+    [tonic, secondMajor, fifthPerfect]: "sus2",
+    [tonic, fourthPerfect, fifthPerfect]: "sus4",
+    [tonic, secondMajor, fifthPerfect, seventhMinor]: "7sus2",
+    [tonic, fourthPerfect, fifthPerfect, seventhMinor]: "7sus4",
+    [tonic, secondMajor, fourthPerfect, fifthPerfect, seventhMinor]: "9sus4",
+    // Acordes extendidos
+    [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMajor]: "maj9",
+    [tonic, secondMajor, thirdMinor, fifthPerfect, seventhMinor]: "m9",
+    [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMinor]: "9",
+    [tonic, secondMajor, thirdMajor, fifthPerfect]: "add9",
+    [tonic, secondMajor, thirdMinor, fifthPerfect]: "m(add9)",
+    [tonic, thirdMajor, fourthPerfect, fifthPerfect]: "add11",
+    [tonic, thirdMinor, fourthPerfect, fifthPerfect]: "m(add11)",
+    [tonic, secondMajor, thirdMajor, fifthPerfect, sixthMajor]: "6/9",
+    [tonic, secondMajor, thirdMinor, fifthPerfect, sixthMajor]: "m6/9",
+    // Acordes invertidos
+    [tonic, thirdMinor, fifthAugmented]: "major 1st inversion",
+    [tonic, fourthPerfect, sixthMajor]: "major 2st inversion",
+    [tonic, thirdMajor, sixthMajor]: "minor 1st inversion",
+    [tonic, fourthPerfect, fifthAugmented]: "minor 2st inversion",
+  };
 
-  void fillUp(List<NoteModel> notes) {
+  final List<NoteModel> notes;
+  final List<NoteModel> scale;
+
+  Scale(this.notes, this.scale);
+
+  static Scale from(List<NoteModel> notes) {
     NoteModel tonic = notes[0];
     List<NoteModel> scale = [];
 
@@ -123,53 +168,7 @@ class Scale {
       cursor = nextNote;
     } while (cursor != tonic);
 
-    this.notes = notes;
-    this.scale = scale;
-  }
-
-  // listar demais acordes
-  Map<List<Interval>, String> getChordShapes() {
-    return {
-      // Acordes maiores
-      [tonic, thirdMajor, fifthPerfect]: "",
-      [tonic, thirdMajor, fifthAugmented]: "aug",
-      [tonic, thirdMajor, fifthPerfect, sixthMajor]: "6",
-      [tonic, thirdMajor, fifthPerfect, seventhMajor]: "maj7",
-      [tonic, thirdMajor, fifthAugmented, seventhMajor]: "augM7",
-      [tonic, thirdMajor, fifthPerfect, seventhMinor]: "7",
-      [tonic, thirdMajor, fifthAugmented, seventhMinor]: "aug7",
-      [tonic, thirdMajor, fifthDiminished, seventhMinor]: "7b5",
-      // Acordes menores
-      [tonic, thirdMinor, fifthPerfect]: "m",
-      [tonic, thirdMinor, fifthPerfect, sixthMajor]: "m6",
-      [tonic, thirdMinor, fifthPerfect, seventhMinor]: "m7",
-      [tonic, thirdMinor, fifthPerfect, seventhMajor]: "mM7",
-      [tonic, thirdMinor, fifthDiminished, seventhMinor]: "m7b5",
-      [tonic, thirdMinor, fifthDiminished]: "dim",
-      [tonic, thirdMinor, fifthDiminished, sixthMajor]: "dim7",
-      // Acordes suspensos
-      [tonic, fifthPerfect]: "5",
-      [tonic, secondMajor, fifthPerfect]: "sus2",
-      [tonic, fourthPerfect, fifthPerfect]: "sus4",
-      [tonic, secondMajor, fifthPerfect, seventhMinor]: "7sus2",
-      [tonic, fourthPerfect, fifthPerfect, seventhMinor]: "7sus4",
-      [tonic, secondMajor, fourthPerfect, fifthPerfect, seventhMinor]: "9sus4",
-      // Acordes extendidos
-      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMajor]: "maj9",
-      [tonic, secondMajor, thirdMinor, fifthPerfect, seventhMinor]: "m9",
-      [tonic, secondMajor, thirdMajor, fifthPerfect, seventhMinor]: "9",
-      [tonic, secondMajor, thirdMajor, fifthPerfect]: "add9",
-      [tonic, secondMajor, thirdMinor, fifthPerfect]: "m(add9)",
-      [tonic, thirdMajor, fourthPerfect, fifthPerfect]: "add11",
-      [tonic, thirdMinor, fourthPerfect, fifthPerfect]: "m(add11)",
-      [tonic, secondMajor, thirdMajor, fifthPerfect, sixthMajor]: "6/9",
-      [tonic, secondMajor, thirdMinor, fifthPerfect, sixthMajor]: "m6/9",
-      // Acordes invertidos
-      [tonic, thirdMinor, fifthAugmented]: "major 1st inversion",
-      [tonic, fourthPerfect, sixthMajor]: "major 2st inversion",
-      [tonic, thirdMajor, sixthMajor]: "minor 1st inversion",
-      [tonic, fourthPerfect, fifthAugmented]: "minor 2st inversion",
-    };
+    return Scale(notes, scale);
   }
 
   String getInversionString(String inv) {
@@ -229,12 +228,8 @@ class Scale {
     }
   }
 
-  static String getChord({required List<NoteModel> notes}) {
-    var scale = Scale();
-    scale.fillUp(notes);
-    var intervals = scale.getIntervals();
-    var chordShapes = scale.getChordShapes();
-
+  String getChord() {
+    var intervals = getIntervals();
     String? chordString;
     for (var pair in chordShapes.entries) {
       if (listEquals(pair.key, intervals)) {
@@ -245,7 +240,7 @@ class Scale {
     if (chordString == null) return "Nenhum acorde encontrado";
 
     if (chordString.contains('inversion')) {
-      return scale.getInversionString(chordString);
+      return getInversionString(chordString);
     }
 
     var chordSymbol = notes[0].symbol.toString().split('.').last;
