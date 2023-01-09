@@ -174,13 +174,13 @@ class Scale {
   String getInversionString(String inv) {
     switch (inv) {
       case 'major 1st inversion':
-        return '${scale[8].toString()}/${scale[0].toString()}';
+        return '${scale[8].toString()}/${notes[0].toString()}';
       case 'major 2st inversion':
-        return '${scale[5].toString()}/${scale[0].toString()}';
+        return '${scale[5].toString()}/${notes[0].toString()}';
       case 'minor 1st inversion':
-        return '${scale[9].toString()}m/${scale[0].toString()}';
+        return '${scale[9].toString()}m/${notes[0].toString()}';
       case 'minor 2st inversion':
-        return '${scale[5].toString()}m/${scale[0].toString()}';
+        return '${scale[5].toString()}m/${notes[0].toString()}';
       default:
         return inv;
     }
