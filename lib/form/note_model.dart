@@ -107,6 +107,21 @@ class Scale {
   final seventhMinor = Interval(IntervalName.seventh, IntervalType.minor);
   final seventhMajor = Interval(IntervalName.seventh, IntervalType.major);
 
+  static final chromaticScale = [
+    NoteModel(Symbol.C, Accidental.normal),
+    NoteModel(Symbol.C, Accidental.sharp),
+    NoteModel(Symbol.D, Accidental.normal),
+    NoteModel(Symbol.D, Accidental.sharp),
+    NoteModel(Symbol.E, Accidental.normal),
+    NoteModel(Symbol.F, Accidental.normal),
+    NoteModel(Symbol.F, Accidental.sharp),
+    NoteModel(Symbol.G, Accidental.normal),
+    NoteModel(Symbol.G, Accidental.sharp),
+    NoteModel(Symbol.A, Accidental.normal),
+    NoteModel(Symbol.A, Accidental.sharp),
+    NoteModel(Symbol.B, Accidental.normal),
+  ];
+
   // listar demais acordes
   late final Map<List<Interval>, String> chordShapes = {
     // Acordes maiores
@@ -157,17 +172,12 @@ class Scale {
 
   static Scale from(List<NoteModel> notes) {
     NoteModel tonic = notes[0];
-    List<NoteModel> scale = [];
-
     tonic = NoteModel.checkEnarmonics(tonic);
-
-    var cursor = tonic;
-    do {
-      var nextNote = NoteModel.getNextNote(cursor);
-      scale.add(cursor);
-      cursor = nextNote;
-    } while (cursor != tonic);
-
+    var index = chromaticScale.indexOf(tonic);
+    var scale = [
+      ...chromaticScale.sublist(index),
+      ...chromaticScale.sublist(0, index)
+    ];
     return Scale(notes, scale);
   }
 
@@ -230,15 +240,14 @@ class Scale {
 
   String getChord() {
     var intervals = getIntervals();
-    String? chordString;
-    for (var pair in chordShapes.entries) {
-      if (listEquals(pair.key, intervals)) {
-        chordString = pair.value;
-        break;
-      }
-    }
-    if (chordString == null) return "Nenhum acorde encontrado";
 
+    var chordQuery =
+        chordShapes.entries.where((e) => listEquals(e.key, intervals));
+    if (chordQuery.isEmpty) {
+      return "Nenhum acorde encontrado";
+    }
+
+    var chordString = chordQuery.first.value;
     if (chordString.contains('inversion')) {
       return getInversionString(chordString);
     }

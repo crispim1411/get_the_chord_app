@@ -9,6 +9,5 @@ class Config {
       'problemas acabaram!';
   static const githubUrl = 'https://github.com/crispim1411/get_the_chord_app';
   static final appIcon = Image.asset('assets/images/app_icon.png');
-  // preenchido ao iniciar da aplicação
   static late final PackageInfo kPackageInfo;
 }

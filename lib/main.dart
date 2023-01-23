@@ -5,7 +5,6 @@ import 'package:get_chord_app/dictionary/chord_dictionary.dart';
 import 'package:get_chord_app/about/about_view.dart';
 import 'package:get_chord_app/home/home_view.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'form/form_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
